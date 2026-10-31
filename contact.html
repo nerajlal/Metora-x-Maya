@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contact Metora — Start Your Digital Project | Web Studio, Kerala</title>
+  <meta name="description"
+    content="Get in touch with Metora and Maya. WhatsApp, email, or schedule a discovery call for your upcoming website or web tool development.">
+  <link rel="canonical" href="https://metora.in/contact.html">
+  <meta name="theme-color" content="#FDFBF7">
+
+  <link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="icon" href="icon-512.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Noto+Serif+Malayalam:wght@400..900&display=swap">
+  <link rel="preload" href="fonts/manjari-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/manjari-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css?v=17">
+
+  <style>
+    .contact-hero {
+      padding-top: calc(var(--nav-h) + clamp(40px, 6vw, 80px));
+      padding-bottom: clamp(40px, 5vw, 60px);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+      padding-bottom: clamp(60px, 8vw, 120px);
+    }
+
+    .contact-card {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+      border-radius: 16px;
+      padding: clamp(28px, 3.5vw, 44px);
+      box-shadow: 0 16px 36px -12px rgba(15, 23, 42, 0.08);
+      margin-bottom: 24px;
+    }
+
+    .channel-list {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .channel-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--paper);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-radius: 12px;
+      padding: 16px 20px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: border-color .25s, transform .25s, box-shadow .25s;
+    }
+
+    .channel-item:hover {
+      border-color: var(--red);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px -10px rgba(217, 119, 6, 0.25);
+    }
+
+    .channel-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--leaf);
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      display: grid;
+      place-items: center;
+      font-size: 20px;
+      color: var(--red);
+      flex: none;
+    }
+
+    .channel-item strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 700;
+    }
+
+    .channel-item span {
+      font-size: 14px;
+      color: var(--ink-2);
+      font-family: var(--mono);
+    }
+
+    .contact-avatar-wrap {
+      position: sticky;
+      top: calc(var(--nav-h) + 40px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact-avatar-wrap img {
+      width: min(85%, 340px);
+      height: auto;
+      filter: var(--sh-cut);
+    }
+
+    .contact-badge-info {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.25);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-top: -24px;
+      z-index: 2;
+      width: 100%;
+      max-width: 340px;
+      box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.12);
+    }
+
+    @media (max-width: 959px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-avatar-wrap {
+        position: relative;
+        top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo text-logo" href="index.html" aria-label="Metora — Home">
+      <span class="logo-mark">METORA</span>
+      <span class="logo-dot">.</span>
+    </a>
+    <nav class="nav__links" aria-label="Main menu">
+      <a href="index.html#services">Services</a>
+      <a href="saas.html">SaaS</a>
+      <a href="about.html">About</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="contact.html" aria-current="page">Let's Connect</a>
+    </nav>
+    <nav class="lang" aria-label="Language switcher">
+      <a href="ml.html" lang="ml" hreflang="ml"><span class="lang__full">മലയാളം</span><span class="lang__short"
+          aria-hidden="true">മ</span></a>
+      <a href="contact.html" lang="en" hreflang="en" aria-current="page"><span class="lang__full">English</span><span
+          class="lang__short" aria-hidden="true">EN</span></a>
+      <a href="hi.html" lang="hi" hreflang="hi"><span class="lang__full">हिन्दी</span><span class="lang__short"
+          aria-hidden="true">हि</span></a>
+    </nav>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Mobile menu">
+      <a href="index.html">Home</a>
+      <a href="index.html#services">Services</a>
+      <a href="saas.html">SaaS</a>
+      <a href="about.html">About</a>
+      <a href="index.html#process">Process</a>
+      <a href="index.html#faq">FAQ</a>
+      <a href="contact.html">Let's Connect</a>
+    </nav>
+  </div>
+
+  <main id="main">
+    <section class="contact-hero wrap">
+      <div class="page-hero__badge"
+        style="display:inline-flex; align-items:center; gap:10px; background:var(--paper-2); border:1px solid rgba(217, 119, 6, 0.25); border-radius:999px; padding:8px 18px 7px; font:600 clamp(12px, 1.1vw, 13px)/1 var(--mono); color:var(--ink); letter-spacing:0.06em; margin-bottom:20px;">
+        <b>START A PROJECT</b> · Let's Connect
+      </div>
+      <h1 style="font-family:var(--display); font-size:clamp(38px, 4.4vw, 68px); line-height:1.1; margin-bottom:20px;">
+        Let's talk about your <span class="highlight-gold">next big launch</span>.
+      </h1>
+      <p style="font-size:clamp(18px, 1.3vw, 22px); line-height:1.65; color:var(--ink-2); max-width:52ch;">
+        Whether you need an all-inclusive yearly subscription website, custom web software, or a complete digital
+        redesign, our studio is ready.
+      </p>
+    </section>
+
+    <section class="wrap">
+      <div class="contact-grid">
+        <div>
+          <div class="contact-card">
+            <h2 style="font-size:clamp(24px, 2.2vw, 32px); margin-bottom:12px;">Direct Studio Channels</h2>
+            <p style="color:var(--ink-2); line-height:1.7;">Reach out directly via your preferred platform. Maya and the
+              Metora team typically respond within minutes during business hours.</p>
+
+            <div class="channel-list">
+              <a class="channel-item"
+                href="https://wa.me/918547470675?text=Hi%20Metora%21%20I%20would%20like%20to%20discuss%20a%20website%20project."
+                target="_blank" rel="noopener">
+                <div class="channel-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                <div>
+                  <strong>WhatsApp (Instant Consultation)</strong>
+                  <span>+91 85474 70675</span>
+                </div>
+              </a>
+
+              <a class="channel-item" href="tel:+918547470675">
+                <div class="channel-icon"><i class="fa-solid fa-phone"></i></div>
+                <div>
+                  <strong>Direct Phone Call</strong>
+                  <span>+91 85474 70675</span>
+                </div>
+              </a>
+
+              <a class="channel-item" href="mailto:hellometora@gmail.com">
+                <div class="channel-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div>
+                  <strong>Official Email</strong>
+                  <span>hellometora@gmail.com</span>
+                </div>
+              </a>
+
+              <a class="channel-item" href="https://www.instagram.com/metora.in/" target="_blank" rel="noopener">
+                <div class="channel-icon"><i class="fa-brands fa-instagram"></i></div>
+                <div>
+                  <strong>Metora Instagram</strong>
+                  <span>@metora.in</span>
+                </div>
+              </a>
+
+              <a class="channel-item" href="https://www.instagram.com/brandwithmaya/" target="_blank" rel="noopener">
+                <div class="channel-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div>
+                  <strong>Brand With Maya</strong>
+                  <span>@brandwithmaya</span>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-avatar-wrap">
+          <img src="img/ello/ello-point.webp" alt="Maya guiding consultation" width="791" height="1100">
+          <div class="contact-badge-info">
+            <h3 style="font-size:20px; margin-bottom:6px;">Consultation Guarantee</h3>
+            <p style="font-size:14px; color:var(--ink-2); line-height:1.6; margin:0;">
+              Free discovery roadmap · Transparent itemized quotes · No hidden fees
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner wrap">
+      <div class="footer__brand">
+        <a class="footer__logo text-logo" href="index.html" aria-label="Metora">
+          <span class="logo-mark">METORA</span>
+          <span class="logo-dot">.</span>
+        </a>
+        <p class="footer__tagline">Engineered in Kerala. High-performance subscription websites, bespoke web applications, and brand identities.</p>
+        <div class="footer__status-badge">
+          <span class="footer__status-dot"></span>
+          <span>STUDIO OPEN · ACCEPTING SELECT CLIENTS</span>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html#services">Services</a></li>
+          <li><a href="saas.html">SaaS Products</a></li>
+          <li><a href="about.html">About Metora</a></li>
+          <li><a href="contact.html" aria-current="page">Let's Connect</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>SaaS Ecosystem</h4>
+        <ul>
+          <li><a href="https://metohub.cloud/" target="_blank" rel="noopener">MetoHub (Storefront Builder)</a></li>
+          <li><a href="https://metomenu.metora.in/" target="_blank" rel="noopener">MetoMenu (Restaurant OS)</a></li>
+          <li><a href="saas.html#metohub">Instagram Commerce</a></li>
+          <li><a href="saas.html#metomenu">QR Contactless Menus</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Get In Touch</h4>
+        <div class="footer__contact-items">
+          <a class="footer__contact-link" href="https://wa.me/918547470675?text=Hi%20Maya%2C%20I%20would%20like%20to%20discuss%20a%20website%20project." target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>+91 85474 70675</span>
+          </a>
+          <a class="footer__contact-link" href="tel:+918547470675">
+            <i class="fa-solid fa-phone"></i>
+            <span>+91 85474 70675</span>
+          </a>
+          <a class="footer__contact-link" href="mailto:hellometora@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hellometora@gmail.com</span>
+          </a>
+        </div>
+        <div class="footer__social-row">
+          <a class="footer__social-icon" href="https://www.instagram.com/metora.in/" target="_blank" rel="noopener" aria-label="Metora Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="footer__social-icon" href="https://www.instagram.com/brandwithmaya/" target="_blank" rel="noopener" aria-label="Brand With Maya Instagram">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </a>
+          <a class="footer__social-icon" href="https://wa.me/918547470675" target="_blank" rel="noopener" aria-label="WhatsApp Chat">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 Metora · metora.in · Web Studio, Kerala</span>
+      <a href="#top" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px;">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=14" defer></script>
+</body>
+
+</html>
