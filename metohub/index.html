@@ -165,20 +165,43 @@
       color: var(--ink);
     }
 
-    .demo-stores-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: clamp(20px, 2.5vw, 32px);
-      margin-top: 40px;
+    .demo-scroll-wrapper {
+      position: relative;
+      margin-top: 36px;
+    }
+
+    .demo-scroll-track {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 24px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--red) var(--paper-2);
+    }
+
+    .demo-scroll-track::-webkit-scrollbar {
+      height: 8px;
+    }
+    .demo-scroll-track::-webkit-scrollbar-track {
+      background: var(--paper-2);
+      border-radius: 999px;
+    }
+    .demo-scroll-track::-webkit-scrollbar-thumb {
+      background: var(--red);
+      border-radius: 999px;
     }
 
     .demo-store-card {
+      flex: 0 0 clamp(300px, 32vw, 380px);
+      scroll-snap-align: start;
       background: var(--paper-2);
       border: 1px solid rgba(217, 119, 6, 0.2);
-      border-radius: 18px;
+      border-radius: 20px;
       overflow: hidden;
       box-shadow:
-        0 10px 24px -8px rgba(15, 23, 42, 0.08),
+        0 12px 28px -8px rgba(15, 23, 42, 0.08),
         0 0 0 1px rgba(255, 255, 255, 0.7) inset;
       transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
       text-decoration: none;
@@ -330,11 +353,97 @@
       color: var(--ink-2);
     }
 
+    /* Seller Testimonials / Creator Stories */
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+    .story-card-luxury {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.18);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow:
+        0 12px 28px -8px rgba(15, 23, 42, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+      position: relative;
+    }
+
+    .story-card-luxury:hover {
+      transform: translateY(-6px);
+      border-color: var(--red);
+      box-shadow:
+        0 24px 44px -12px rgba(217, 119, 6, 0.22),
+        0 0 16px 2px rgba(245, 158, 11, 0.12);
+    }
+
+    .story-stars {
+      display: flex;
+      gap: 4px;
+      color: #F59E0B;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .story-quote {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink);
+      font-style: italic;
+      margin: 0 0 24px 0;
+      flex-grow: 1;
+    }
+
+    .story-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 1px dashed rgba(15, 23, 42, 0.12);
+    }
+
+    .story-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--red), var(--ink));
+      color: #FFFDF8;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 17px;
+      font-family: var(--display);
+      box-shadow: 0 4px 10px rgba(217, 119, 6, 0.25);
+    }
+
+    .story-meta h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .story-meta p {
+      margin: 2px 0 0;
+      font-size: 13px;
+      color: var(--red);
+      font-weight: 600;
+      font-family: var(--mono);
+    }
+
     @media (max-width: 959px) {
       .metohub-split { grid-template-columns: 1fr; }
       .demo-stores-grid { grid-template-columns: 1fr; }
       .pricing-cards-grid { grid-template-columns: 1fr; }
       .pricing-card-luxury.featured { transform: none; }
+      .stories-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -475,51 +584,120 @@
         <p class="lede">Every store is optimized for mobile Instagram shoppers with instant load times and one-tap checkout.</p>
       </header>
 
-      <div class="demo-stores-grid">
-        <a class="demo-store-card" href="https://metohub.cloud/store/mens-clothing" target="_blank" rel="noopener">
-          <img src="https://metohub.cloud/images/landing/reference/demo-mens.jpg" alt="Thread & Form Men's Clothing">
-          <div class="demo-store-content">
-            <div>
-              <p class="demo-store-tag">Men's Apparel</p>
-              <h3 class="demo-store-title">Thread &amp; Form</h3>
-              <p class="demo-store-theme">Atelier Edit Theme</p>
-              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Apparel drops with sizes, color variants, and instant inventory tracking.</p>
+      <div class="demo-scroll-wrapper">
+        <div class="demo-scroll-track">
+          <!-- 1. Men's clothing -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/mens-clothing" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-mens.jpg" alt="Thread & Form Men's Clothing" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Men’s Clothing</p>
+                <h3 class="demo-store-title">Thread &amp; Form</h3>
+                <p class="demo-store-theme">Atelier Edit theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Apparel drops with sizes, variants and stock tracking.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
             </div>
-            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
-              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </span>
-          </div>
-        </a>
+          </a>
 
-        <a class="demo-store-card" href="https://metohub.cloud/store/jewelry" target="_blank" rel="noopener">
-          <img src="https://metohub.cloud/images/landing/reference/demo-jewelry.jpg" alt="Aurelia Jewels">
-          <div class="demo-store-content">
-            <div>
-              <p class="demo-store-tag">Handcrafted Jewelry</p>
-              <h3 class="demo-store-title">Aurelia Jewels</h3>
-              <p class="demo-store-theme">Maison Luxe Theme</p>
-              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Highlight custom artisan pieces with high-res galleries and material options.</p>
+          <!-- 2. Grocery -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/grocery" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-grocery.jpg" alt="Fresh Basket Grocery" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Grocery</p>
+                <h3 class="demo-store-title">Fresh Basket</h3>
+                <p class="demo-store-theme">Fresh Market theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Group everyday essentials into easy-to-browse collections.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
             </div>
-            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
-              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </span>
-          </div>
-        </a>
+          </a>
 
-        <a class="demo-store-card" href="https://metohub.cloud/store/perfume" target="_blank" rel="noopener">
-          <img src="https://metohub.cloud/images/landing/reference/demo-perfume.jpg" alt="Maison Mist Perfume">
-          <div class="demo-store-content">
-            <div>
-              <p class="demo-store-tag">Luxury Fragrance</p>
-              <h3 class="demo-store-title">Maison Mist</h3>
-              <p class="demo-store-theme">Noir Collection Theme</p>
-              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Present signature notes, volume variations (50ml/100ml), and bundle discounts.</p>
+          <!-- 3. Gadgets -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/gadgets" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-gadgets.jpg" alt="Circuit Cart Gadgets" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Gadgets</p>
+                <h3 class="demo-store-title">Circuit Cart</h3>
+                <p class="demo-store-theme">Vista Shop theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Keep model options, product details and stock together.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
             </div>
-            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
-              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            </span>
-          </div>
-        </a>
+          </a>
+
+          <!-- 4. Jewelry -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/jewelry" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-jewelry.jpg" alt="Aurelia Jewels" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Jewelry</p>
+                <h3 class="demo-store-title">Aurelia Jewels</h3>
+                <p class="demo-store-theme">Maison Luxe theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Give each piece its own photos, details and collection.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- 5. Watches -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/watches" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-watches.jpg" alt="Hour House Watches" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Watches</p>
+                <h3 class="demo-store-title">Hour House</h3>
+                <p class="demo-store-theme">Organic Pantry theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Showcase each watch with photos and available variants.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- 6. Women's clothing -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/womens-clothing" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-womens.jpg" alt="Loom & Grace Women's Clothing" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Women’s Clothing</p>
+                <h3 class="demo-store-title">Loom &amp; Grace</h3>
+                <p class="demo-store-theme">Bloom Avenue theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Organize new collections with sizes and stock for each look.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
+            </div>
+          </a>
+
+          <!-- 7. Perfume -->
+          <a class="demo-store-card" href="https://metohub.cloud/store/perfume" target="_blank" rel="noopener">
+            <img src="https://metohub.cloud/images/landing/reference/demo-perfume.jpg" alt="Maison Mist Perfume" loading="lazy">
+            <div class="demo-store-content">
+              <div>
+                <p class="demo-store-tag">Perfume</p>
+                <h3 class="demo-store-title">Maison Mist</h3>
+                <p class="demo-store-theme">Noir Collection theme</p>
+                <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Present signature scents with size options and gift bundles.</p>
+              </div>
+              <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+                Explore Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </span>
+            </div>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -688,6 +866,201 @@
 
           <a class="btn btn--outline" href="https://metohub.cloud?get_started=1&plan=enterprise" target="_blank" rel="noopener" style="margin-top: 32px; justify-content: center;">
             <span>Start Free Trial</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Creator Stories & Testimonials -->
+    <section class="wrap" id="client-reviews" style="padding-block: clamp(70px, 9vw, 120px); border-top: var(--rule);">
+      <header class="section-head section-head--left">
+        <p class="eyebrow eyebrow--pill"><b>SELLER STORIES</b></p>
+        <h2>Loved by <em>creators</em> across India.</h2>
+        <p class="lede">From Instagram boutiques to handcrafted luxury collections, here is how sellers run on MetoHub.</p>
+      </header>
+
+      <div class="stories-grid">
+        <!-- 1. Anjali Menon -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“Setting up my boutique took literally 10 minutes. My customers love how clean and fast the checkout is compared to exchanging 50 DMs for one order.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">AM</div>
+            <div class="story-meta">
+              <h4>Anjali Menon</h4>
+              <p>Clothing Seller · Kochi</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Fathima Nazeer -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“At ₹99 a month, nothing else comes close. I get orders directly with size and address details, with zero commission taken from my handmade jewelry sales.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">FN</div>
+            <div class="story-meta">
+              <h4>Fathima Nazeer</h4>
+              <p>Jewelry Maker · Calicut</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. Arjun Nair -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“The custom domain on Pro made our artisanal perfume brand look like a million bucks. Our conversion rate tripled as soon as we put the link in bio.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">AN</div>
+            <div class="story-meta">
+              <h4>Arjun Nair</h4>
+              <p>Fragrance Seller · Bengaluru</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Meera Krishnan -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“The dashboard is so straightforward. I manage inventory drops between school runs without needing any developer or technical knowledge.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">MK</div>
+            <div class="story-meta">
+              <h4>Meera Krishnan</h4>
+              <p>Home Decor Maker · Trivandrum</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. Nithin Joseph -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“Flash drops on streetwear usually crashed other builders or took forever. MetoHub handles high traffic easily and looks ultra sharp on mobile.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">NJ</div>
+            <div class="story-meta">
+              <h4>Nithin Joseph</h4>
+              <p>Streetwear Seller · Chennai</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 6. Devika Pillai -->
+        <article class="story-card-luxury">
+          <div>
+            <div class="story-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="story-quote">“Customer support over WhatsApp is responsive and genuinely helpful. Switching from DM sales to MetoHub was the best decision for my skincare line.”</p>
+          </div>
+          <div class="story-author">
+            <div class="story-avatar">DP</div>
+            <div class="story-meta">
+              <h4>Devika Pillai</h4>
+              <p>Skincare Creator · Mumbai</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Frequently Asked Questions (Accordion) -->
+    <section class="faq wrap" id="faq" style="border-top: var(--rule);">
+      <header class="section-head section-head--left">
+        <p class="eyebrow eyebrow--pill"><b>FAQS</b></p>
+        <h2>Everything you need <em>to know.</em></h2>
+        <p class="lede">Clear answers about pricing, domain mapping, payments, and store ownership.</p>
+      </header>
+
+      <div class="pad">
+        <div class="pad__head">
+          <span>Frequently Asked Questions</span>
+          <span>8 Answers</span>
+        </div>
+
+        <details class="qa" open>
+          <summary>Is it really ₹99 per month?</summary>
+          <p>Yes. The Base plan is ₹99 per month and includes everything you need to sell online — 15 themes, unlimited products, orders, categories, discount codes, and analytics. No hidden fees or sales commissions.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Do I need coding skills?</summary>
+          <p>Not at all. You can set up your store in minutes by selecting a theme, typing your store details, and uploading your products. Everything is managed from an intuitive, clean visual dashboard.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Can I sell products other than clothing?</summary>
+          <p>Yes! MetoHub is designed for any type of product: fashion, groceries, gadgets, jewelry, watches, perfume, artisanal crafts, cosmetics, home decor, and more. Our themes adapt seamlessly to your niche.</p>
+        </details>
+
+        <details class="qa">
+          <summary>Can I personalize the theme and store content?</summary>
+          <p>Absolutely. You can choose from 15 themes, upload your custom logo, customize brand colors, add homepage banners, highlight featured collections, and configure promotional banners anytime.</p>
+        </details>
+
+        <details class="qa">
+          <summary>How do customers pay for orders?</summary>
+          <p>Cash on delivery (COD) and manual payments are built right in, perfect for direct seller-to-buyer sales with zero gateway fees. For your MetoHub subscription itself, payments are securely processed via Razorpay (UPI, Cards, Net Banking).</p>
+        </details>
+
+        <details class="qa">
+          <summary>Can I use my own domain?</summary>
+          <p>Yes! On the Pro (₹249/mo) and Enterprise (₹749/mo) plans, you can connect your own custom domain (e.g. <code>yourstore.com</code> or <code>yourbrand.in</code>) with automatic free SSL security.</p>
+        </details>
+
+        <details class="qa">
+          <summary>What happens after the free trial?</summary>
+          <p>You enjoy a 7-day free trial on all plans. If you do not subscribe immediately after the trial, your storefront remains visible and active for an additional 30 days so your customers never experience downtime while you decide.</p>
+        </details>
+
+        <details class="qa">
+          <summary>What do I need to create a store?</summary>
+          <p>Just your name, email, phone number, business name, and password. No credit card is required to begin your 7-day free trial.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- Bottom Conversion Banner -->
+    <section class="wrap" style="padding-bottom: clamp(80px, 10vw, 130px);">
+      <div style="background: linear-gradient(135deg, var(--ink) 0%, #1a1714 100%); border: 1px solid rgba(217, 119, 6, 0.35); border-radius: 28px; padding: clamp(40px, 6vw, 72px) clamp(24px, 5vw, 64px); text-align: center; color: var(--paper); box-shadow: 0 24px 60px -15px rgba(0,0,0,0.4), 0 0 30px rgba(217, 119, 6, 0.15); position: relative; overflow: hidden;">
+        <div style="position: absolute; -webkit-mask-image: radial-gradient(circle, black, transparent 75%); inset: 0; background: radial-gradient(circle at 50% 0%, rgba(217, 119, 6, 0.25), transparent 70%); pointer-events: none;"></div>
+        <p class="eyebrow eyebrow--pill" style="background: rgba(255,255,255,0.06); border-color: rgba(217, 119, 6, 0.4); color: var(--wood-1); margin-bottom: 20px;">
+          <b>ZERO RISK · 7-DAY FREE TRIAL</b>
+        </p>
+        <h2 style="font-size: clamp(32px, 4.5vw, 54px); font-family: var(--display); margin: 0 0 16px; color: #FFFDF8;">
+          Launch your store in <em style="color: var(--sea); font-style: italic;">10 minutes.</em>
+        </h2>
+        <p style="font-size: clamp(16px, 1.8vw, 19px); color: rgba(255, 255, 255, 0.75); max-width: 600px; margin: 0 auto 36px; line-height: 1.6;">
+          Join hundreds of independent sellers growing their sales on MetoHub. Plans start at just ₹99/month.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a class="btn btn--primary" href="https://metohub.cloud?get_started=1" target="_blank" rel="noopener" style="padding: 16px 36px; font-size: 16px;">
+            <span>Create Your Store Now</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--outline" href="https://wa.me/918547470675?text=Hi%20MetoHub%20Team%2C%20I%20have%20questions%20about%20starting%20my%20store." target="_blank" rel="noopener" style="border-color: rgba(255,255,255,0.25); color: #FFFDF8; padding: 16px 28px;">
+            <i class="fa-brands fa-whatsapp" style="margin-right: 8px; color: var(--sea);"></i>
+            <span>Chat on WhatsApp</span>
           </a>
         </div>
       </div>
