@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MetoHub — Online Store Builder for Instagram Creators | Powered by Metora</title>
+  <meta name="description"
+    content="Turn your Instagram DMs into a real branded online store. 15 custom luxury themes, variant tracking, orders & WhatsApp integration. Plans from ₹99/month.">
+  <meta name="theme-color" content="#FDFBF7">
+
+  <link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="icon" href="icon-512.png" sizes="512x512" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="css/style.css?v=18">
+
+  <style>
+    /* MetoHub Specific Theme Extensions using Metora Design Tokens */
+    .metohub-hero {
+      padding-top: calc(var(--nav-h) + clamp(40px, 6vw, 90px));
+      padding-bottom: clamp(50px, 7vw, 100px);
+    }
+
+    .metohub-split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(36px, 5vw, 80px);
+      align-items: center;
+    }
+
+    .phone-mockup {
+      position: relative;
+      background: var(--paper-2);
+      border: 2px solid rgba(217, 119, 6, 0.3);
+      border-radius: 40px;
+      padding: 18px;
+      box-shadow:
+        0 24px 60px -15px rgba(15, 23, 42, 0.22),
+        0 0 32px 4px rgba(245, 158, 11, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .phone-screen {
+      background: var(--paper);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-notch {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px 8px;
+      font: 700 12px var(--mono);
+      color: var(--ink-3);
+      background: var(--paper);
+    }
+
+    .phone-store-bar {
+      background: var(--ink);
+      color: var(--leaf);
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font: 600 12px var(--mono);
+    }
+
+    .phone-store-bar span.tag {
+      color: var(--sea);
+      font-size: 11px;
+    }
+
+    .phone-body {
+      padding: 16px;
+    }
+
+    .phone-product-card {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px -8px rgba(15, 23, 42, 0.08);
+    }
+
+    .phone-product-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .phone-product-info {
+      padding: 14px;
+    }
+
+    .phone-price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .phone-badge {
+      display: inline-block;
+      font: 700 10px/1 var(--mono);
+      background: var(--leaf);
+      color: var(--red);
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(217, 119, 6, 0.3);
+      margin-bottom: 6px;
+    }
+
+    .live-order-badge {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      background: var(--paper);
+      border: 1px solid rgba(217, 119, 6, 0.35);
+      border-radius: 16px;
+      padding: 12px 18px;
+      box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font: 600 13px var(--sans);
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .store-categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 28px 0;
+    }
+
+    .store-cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-2);
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      padding: 8px 16px;
+      border-radius: 999px;
+      font: 600 14px var(--sans);
+      color: var(--ink);
+    }
+
+    .demo-stores-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(20px, 2.5vw, 32px);
+      margin-top: 40px;
+    }
+
+    .demo-store-card {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.2);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow:
+        0 10px 24px -8px rgba(15, 23, 42, 0.08),
+        0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-store-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--red);
+      box-shadow:
+        0 24px 48px -12px rgba(217, 119, 6, 0.25),
+        0 0 20px 2px rgba(245, 158, 11, 0.15);
+    }
+
+    .demo-store-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+      transition: transform 0.5s var(--ease);
+    }
+
+    .demo-store-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .demo-store-content {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    .demo-store-tag {
+      font: 700 11px/1 var(--mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .demo-store-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .demo-store-theme {
+      font: 500 13px var(--mono);
+      color: var(--ink-3);
+      margin-bottom: 12px;
+    }
+
+    .pricing-toggle-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 36px 0 48px;
+    }
+
+    .pricing-pill-toggle {
+      display: inline-flex;
+      background: var(--paper-2);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .pricing-pill-btn {
+      border: 0;
+      background: transparent;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font: 700 14px var(--sans);
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .pricing-pill-btn.active {
+      background: var(--ink);
+      color: var(--paper);
+    }
+
+    .pricing-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(24px, 3vw, 36px);
+      align-items: stretch;
+    }
+
+    .pricing-card-luxury {
+      background: var(--paper-2);
+      border: 1px solid rgba(217, 119, 6, 0.22);
+      border-radius: 24px;
+      padding: clamp(32px, 3.5vw, 44px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow:
+        0 12px 28px -6px rgba(15, 23, 42, 0.1),
+        0 20px 40px -10px rgba(217, 119, 6, 0.12),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+      position: relative;
+    }
+
+    .pricing-card-luxury.featured {
+      border-color: var(--red);
+      background:
+        radial-gradient(rgba(15, 23, 42, 0.08) 1.2px, transparent 1.6px) 0 0 / 14px 14px,
+        linear-gradient(175deg, #FFFDF8 0%, #F7F3EB 100%);
+      box-shadow:
+        0 18px 45px -8px rgba(146, 64, 14, 0.25),
+        0 28px 60px -12px rgba(217, 119, 6, 0.3),
+        0 0 0 1px rgba(217, 119, 6, 0.4) inset;
+      transform: scale(1.02);
+    }
+
+    .pricing-top-tag {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--ink);
+      color: var(--wood-1);
+      border: 1px solid var(--red);
+      font: 700 11px/1 var(--mono);
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .price-value {
+      font: 800 clamp(44px, 4.5vw, 60px)/1 var(--display);
+      color: var(--ink);
+      margin: 18px 0 6px;
+    }
+
+    .price-value small {
+      font-size: 16px;
+      font-family: var(--sans);
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+
+    @media (max-width: 959px) {
+      .metohub-split { grid-template-columns: 1fr; }
+      .demo-stores-grid { grid-template-columns: 1fr; }
+      .pricing-cards-grid { grid-template-columns: 1fr; }
+      .pricing-card-luxury.featured { transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Unified Metora Suite Navigation -->
+  <header class="nav" id="nav">
+    <a class="nav__logo text-logo" href="/" aria-label="Metora — Home">
+      <span class="logo-mark">METORA</span>
+      <span class="logo-dot">.</span>
+    </a>
+    <nav class="nav__links" aria-label="Main menu">
+      <a href="/#services">Services</a>
+      <a href="/saas/" aria-current="page">SaaS</a>
+      <a href="/about/">About</a>
+      <a href="/#process">Process</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/contact/">Let's Connect</a>
+    </nav>
+    <nav class="lang" aria-label="Language switcher">
+      <a href="/ml/" lang="ml" hreflang="ml"><span class="lang__full">മലയാളം</span><span class="lang__short"
+          aria-hidden="true">മ</span></a>
+      <a href="/" lang="en" hreflang="en" aria-current="page"><span class="lang__full">English</span><span
+          class="lang__short" aria-hidden="true">EN</span></a>
+      <a href="/hi/" lang="hi" hreflang="hi"><span class="lang__full">हिन्दी</span><span class="lang__short"
+          aria-hidden="true">हि</span></a>
+    </nav>
+    <button class="nav__menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <nav aria-label="Mobile menu">
+      <a href="/">Home</a>
+      <a href="/#services">Services</a>
+      <a href="/saas/">SaaS</a>
+      <a href="/about/">About</a>
+      <a href="/#process">Process</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/contact/">Let's Connect</a>
+    </nav>
+    <img class="menu__owl" src="img/owl/owl-crossed-sm.webp" alt="" width="208" height="350" loading="lazy">
+  </div>
+
+  <main id="main">
+
+    <!-- MetoHub Hero -->
+    <section class="metohub-hero wrap">
+      <div class="metohub-split">
+        <div>
+          <div class="hero__badge">
+            <span class="hero__badge-dot"></span>
+            <b>METOHUB</b> · Storefront Builder for Instagram Sellers · Metora Labs
+          </div>
+          <h1 class="hero__headline">
+            Out of the DMs. Into a real <span class="highlight-gold">storefront.</span>
+          </h1>
+          <p class="hero__sub">
+            Stop juggling screenshots, bank transfer slips, and endless "Price please?" DMs. Give your Instagram brand one
+            gorgeous, lightning-fast store link where customers browse collections, choose variants, and checkout with ease.
+          </p>
+
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="https://metohub.cloud?get_started=1&plan=base" target="_blank" rel="noopener">
+              <span>Start 7-Day Free Trial</span>
+              <span aria-hidden="true">→</span>
+            </a>
+            <a class="btn btn--outline" href="metohub/#demos">
+              <span>Explore Demo Stores</span>
+            </a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="hero__stat">
+              <strong>₹99/mo</strong>
+              <span>Affordable Entry</span>
+            </div>
+            <div class="hero__stat">
+              <strong>15+</strong>
+              <span>Curated Themes</span>
+            </div>
+            <div class="hero__stat">
+              <strong>0% Fee</strong>
+              <span>Zero Commission</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="phone-mockup">
+            <div class="phone-screen">
+              <div class="phone-notch">
+                <span>9:41</span>
+                <span>METOHUB OS</span>
+                <span><i class="fa-solid fa-wifi"></i> 100%</span>
+              </div>
+              <div class="phone-store-bar">
+                <span>metohub.cloud/yourbrand</span>
+                <span class="tag">VERIFIED</span>
+              </div>
+              <div class="phone-body">
+                <div class="phone-product-card">
+                  <img src="https://metohub.cloud/images/landing/reference/hero.jpg" alt="Lumiere Perfume Store Preview">
+                  <div class="phone-product-info">
+                    <span class="phone-badge">FEATURED COLLECTION</span>
+                    <h4 style="font-size: 16px; margin: 0; color: var(--ink);">Lumière Eau de Parfum</h4>
+                    <div class="phone-price-row">
+                      <span style="font-weight: 800; font-size: 18px; color: var(--red);">₹2,450</span>
+                      <span style="font-size: 12px; font-weight: 600; color: #15803d;">In Stock · Fast COD</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="live-order-badge">
+              <i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 20px;"></i>
+              <div>
+                <strong>New Order #1042 Received</strong>
+                <span style="display: block; font-size: 12px; color: var(--ink-3);">Via Instagram Bio Link</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Supported Business Categories -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track" data-speed="1"></div>
+      <template id="tape-words">
+        <span>Handmade Jewelry</span><b>✦</b><span>Streetwear Drops</span><b>✦</b><span>Aesthetic Home Decor</span><b>✦</b><span>Artisan Skincare</span><b>✦</b><span>Signature Scents</span><b>✦</b><span>Bakeries & Cafes</span><b>✦</b>
+      </template>
+    </div>
+
+    <!-- Live Demo Stores Showcase -->
+    <section class="wrap" id="demos" style="padding-block: clamp(70px, 9vw, 130px);">
+      <header class="section-head section-head--left">
+        <p class="eyebrow eyebrow--pill"><b>LIVE DEMOS</b></p>
+        <h2>Find your brand's <em>aesthetic.</em></h2>
+        <p class="lede">Every store is optimized for mobile Instagram shoppers with instant load times and one-tap checkout.</p>
+      </header>
+
+      <div class="demo-stores-grid">
+        <a class="demo-store-card" href="https://metohub.cloud/store/mens-clothing" target="_blank" rel="noopener">
+          <img src="https://metohub.cloud/images/landing/reference/demo-mens.jpg" alt="Thread & Form Men's Clothing">
+          <div class="demo-store-content">
+            <div>
+              <p class="demo-store-tag">Men's Apparel</p>
+              <h3 class="demo-store-title">Thread &amp; Form</h3>
+              <p class="demo-store-theme">Atelier Edit Theme</p>
+              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Apparel drops with sizes, color variants, and instant inventory tracking.</p>
+            </div>
+            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </span>
+          </div>
+        </a>
+
+        <a class="demo-store-card" href="https://metohub.cloud/store/jewelry" target="_blank" rel="noopener">
+          <img src="https://metohub.cloud/images/landing/reference/demo-jewelry.jpg" alt="Aurelia Jewels">
+          <div class="demo-store-content">
+            <div>
+              <p class="demo-store-tag">Handcrafted Jewelry</p>
+              <h3 class="demo-store-title">Aurelia Jewels</h3>
+              <p class="demo-store-theme">Maison Luxe Theme</p>
+              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Highlight custom artisan pieces with high-res galleries and material options.</p>
+            </div>
+            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </span>
+          </div>
+        </a>
+
+        <a class="demo-store-card" href="https://metohub.cloud/store/perfume" target="_blank" rel="noopener">
+          <img src="https://metohub.cloud/images/landing/reference/demo-perfume.jpg" alt="Maison Mist Perfume">
+          <div class="demo-store-content">
+            <div>
+              <p class="demo-store-tag">Luxury Fragrance</p>
+              <h3 class="demo-store-title">Maison Mist</h3>
+              <p class="demo-store-theme">Noir Collection Theme</p>
+              <p style="font-size: 14px; color: var(--ink-2); line-height: 1.6;">Present signature notes, volume variations (50ml/100ml), and bundle discounts.</p>
+            </div>
+            <span style="font-weight: 700; color: var(--red); font-size: 14px; margin-top: 16px; display: inline-flex; align-items: center; gap: 6px;">
+              Explore Demo Store <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 3-Step Storefront Pipeline -->
+    <section class="process wrap" id="how-it-works" style="border-top: var(--rule);">
+      <header class="section-head section-head--left">
+        <p class="eyebrow eyebrow--pill"><b>HOW IT WORKS</b></p>
+        <h2>Three simple steps to <em>launch.</em></h2>
+        <p class="lede">From signing up to accepting your first order in under 10 minutes.</p>
+      </header>
+      <div class="cards">
+        <div class="card">
+          <span class="card__no">1</span>
+          <img class="card__img" src="img/ello/ello-sketch-sm.webp" alt="Maya store setup">
+          <h3>Create Your Store</h3>
+          <p>Register your brand name, select your preferred theme, and create your password in 60 seconds.</p>
+        </div>
+        <div class="card">
+          <span class="card__no">2</span>
+          <img class="card__img" src="img/ello/ello-laptop-sm.webp" alt="Maya adding products">
+          <h3>Upload Products</h3>
+          <p>Add your photos, prices, sizes, and stock. Organize items into clean, aesthetic collections.</p>
+        </div>
+        <div class="card">
+          <span class="card__no">3</span>
+          <img class="card__img" src="img/ello/ello-point-sm.webp" alt="Maya sharing link">
+          <h3>Paste in Bio</h3>
+          <p>Add your custom link to your Instagram bio or WhatsApp catalog. Orders arrive neatly in your dashboard.</p>
+        </div>
+        <div class="card">
+          <span class="card__no">4</span>
+          <img class="card__img" src="img/ello/ello-jump-sm.webp" alt="Maya celebrating sales">
+          <h3>Fulfill &amp; Grow</h3>
+          <p>Print packing slips, send WhatsApp status updates, and build your thriving independent business.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Everything Included Features -->
+    <section class="wrap" style="padding-bottom: clamp(70px, 9vw, 130px);">
+      <div class="included-box">
+        <div class="included-box__head">
+          <h3>Full Storefront Operating System</h3>
+          <span class="included-badge">✦ ALL PLANS INCLUDED</span>
+        </div>
+        <div class="included-grid">
+          <div class="included-item">
+            <i class="fa-solid fa-palette"></i>
+            <div>
+              <strong>15+ Premium Creator Themes</strong>
+              <span>Match your brand palette, fonts, and aesthetic style.</span>
+            </div>
+          </div>
+          <div class="included-item">
+            <i class="fa-solid fa-tags"></i>
+            <div>
+              <strong>Variant &amp; Size Tracking</strong>
+              <span>Never oversell out-of-stock sizes or colors again.</span>
+            </div>
+          </div>
+          <div class="included-item">
+            <i class="fa-solid fa-receipt"></i>
+            <div>
+              <strong>Automatic Invoices &amp; Slips</strong>
+              <span>Generate one-click customer invoices and packing labels.</span>
+            </div>
+          </div>
+          <div class="included-item">
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <strong>Direct WhatsApp Integration</strong>
+              <span>Notify buyers and send instant tracking numbers via WhatsApp.</span>
+            </div>
+          </div>
+          <div class="included-item">
+            <i class="fa-solid fa-percent"></i>
+            <div>
+              <strong>Coupons &amp; Bundle Deals</strong>
+              <span>Run flash sales, promo codes, and buy-one-get-one offers.</span>
+            </div>
+          </div>
+          <div class="included-item">
+            <i class="fa-solid fa-globe"></i>
+            <div>
+              <strong>Custom Domain Support</strong>
+              <span>Connect your own `.in` or `.com` domain on Pro &amp; Enterprise.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="wrap" id="pricing" style="padding-bottom: clamp(90px, 11vw, 150px); border-top: var(--rule);">
+      <header class="section-head section-head--left" style="margin-top: clamp(60px, 7vw, 90px);">
+        <p class="eyebrow eyebrow--pill"><b>TRANSPARENT PLANS</b></p>
+        <h2>Simple pricing. <em>Zero commission.</em></h2>
+        <p class="lede">No hidden percentages taken from your hard-earned sales. Try free for 7 days.</p>
+      </header>
+
+      <div class="pricing-cards-grid" style="margin-top: 40px;">
+        <!-- Base Plan -->
+        <div class="pricing-card-luxury">
+          <div>
+            <span class="demo-store-tag">STARTER</span>
+            <h3 style="font-size: 26px; margin: 0; color: var(--ink);">Base</h3>
+            <p style="font-size: 15px; color: var(--ink-2); margin-top: 6px;">Perfect for new Instagram sellers launching their first storefront.</p>
+            <div class="price-value">₹99<small>/month</small></div>
+            <p style="font-size: 13px; color: var(--ink-3); font-family: var(--mono); margin-bottom: 24px;">7-Day Free Trial · Billed Monthly</p>
+
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; font-size: 15px; color: var(--ink-2);">
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Custom MetoHub Store Link</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> 15 Themes, Logo &amp; Brand Colors</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Product Variants &amp; Stock Tracking</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Invoices &amp; Packing Labels</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Discount Codes &amp; Bundles</li>
+            </ul>
+          </div>
+
+          <a class="btn btn--outline" href="https://metohub.cloud?get_started=1&plan=base" target="_blank" rel="noopener" style="margin-top: 32px; justify-content: center;">
+            <span>Start Free Trial</span>
+          </a>
+        </div>
+
+        <!-- Pro Plan (Featured) -->
+        <div class="pricing-card-luxury featured">
+          <span class="pricing-top-tag">MOST POPULAR FOR CREATORS</span>
+          <div>
+            <span class="demo-store-tag">GROWING BRANDS</span>
+            <h3 style="font-size: 28px; margin: 0; color: var(--ink);">Pro</h3>
+            <p style="font-size: 15px; color: var(--ink-2); margin-top: 6px;">Your own domain name. Complete brand authority on every link.</p>
+            <div class="price-value" style="color: var(--red);">₹249<small>/month</small></div>
+            <p style="font-size: 13px; color: var(--ink-3); font-family: var(--mono); margin-bottom: 24px;">7-Day Free Trial · Billed Monthly</p>
+
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; font-size: 15px; color: var(--ink-2);">
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> <strong>Everything in Base</strong></li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> <strong>Connect Your Custom Domain (yourbrand.in)</strong></li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Remove MetoHub Branding</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Advanced Sales Analytics</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Priority WhatsApp Studio Support</li>
+            </ul>
+          </div>
+
+          <a class="btn btn--primary" href="https://metohub.cloud?get_started=1&plan=pro" target="_blank" rel="noopener" style="margin-top: 32px; justify-content: center;">
+            <span>Start Free Trial</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="pricing-card-luxury">
+          <div>
+            <span class="demo-store-tag">HIGH VOLUME</span>
+            <h3 style="font-size: 26px; margin: 0; color: var(--ink);">Enterprise</h3>
+            <p style="font-size: 15px; color: var(--ink-2); margin-top: 6px;">For established multi-brand catalog sellers needing dedicated support.</p>
+            <div class="price-value">₹749<small>/month</small></div>
+            <p style="font-size: 13px; color: var(--ink-3); font-family: var(--mono); margin-bottom: 24px;">7-Day Free Trial · Billed Monthly</p>
+
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; font-size: 15px; color: var(--ink-2);">
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> <strong>Everything in Pro</strong></li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Custom Theme Modifications</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> High Volume Traffic SLA</li>
+              <li><i class="fa-solid fa-check" style="color: var(--red); margin-right: 8px;"></i> Dedicated Account Architect</li>
+            </ul>
+          </div>
+
+          <a class="btn btn--outline" href="https://metohub.cloud?get_started=1&plan=enterprise" target="_blank" rel="noopener" style="margin-top: 32px; justify-content: center;">
+            <span>Start Free Trial</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Unified Metora Studio Footer -->
+  <footer class="footer">
+    <div class="footer__inner wrap">
+      <div class="footer__brand">
+        <a class="footer__logo text-logo" href="/" aria-label="Metora">
+          <span class="logo-mark">METORA</span>
+          <span class="logo-dot">.</span>
+        </a>
+        <p class="footer__tagline">MetoHub is proprietary SaaS platform built by Metora Software Labs, Kerala.</p>
+        <div class="footer__status-badge">
+          <span class="footer__status-dot"></span>
+          <span>METOHUB OS · 99.98% UPTIME</span>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/saas/">SaaS Products</a></li>
+          <li><a href="/about/">About Metora</a></li>
+          <li><a href="/contact/">Let's Connect</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>SaaS Ecosystem</h4>
+        <ul>
+          <li><a href="https://metohub.cloud/" target="_blank" rel="noopener">MetoHub Live Platform</a></li>
+          <li><a href="https://metomenu.metora.in/" target="_blank" rel="noopener">MetoMenu Restaurant OS</a></li>
+          <li><a href="/saas/#metohub">Instagram Commerce</a></li>
+          <li><a href="/saas/#metomenu">QR Menus</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Get In Touch</h4>
+        <div class="footer__contact-items">
+          <a class="footer__contact-link" href="https://wa.me/918547470675?text=Hi%20Maya%2C%20I%20have%20questions%20about%20MetoHub." target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>+91 85474 70675</span>
+          </a>
+          <a class="footer__contact-link" href="mailto:hellometora@gmail.com">
+            <i class="fa-solid fa-envelope"></i>
+            <span>hellometora@gmail.com</span>
+          </a>
+        </div>
+        <div class="footer__social-row">
+          <a class="footer__social-icon" href="https://www.instagram.com/metora.in/" target="_blank" rel="noopener" aria-label="Metora Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="footer__social-icon" href="https://www.instagram.com/brandwithmaya/" target="_blank" rel="noopener" aria-label="Brand With Maya Instagram">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </a>
+          <a class="footer__social-icon" href="https://wa.me/918547470675" target="_blank" rel="noopener" aria-label="WhatsApp Chat">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 MetoHub by Metora · Engineered in Kerala</span>
+      <a href="#top" style="color: rgba(255,255,255,0.7); text-decoration: none; font-size: 12px;">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=15" defer></script>
+</body>
+
+</html>
