@@ -168,34 +168,34 @@
     .demo-scroll-wrapper {
       position: relative;
       margin-top: 36px;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
     }
 
     .demo-scroll-track {
       display: flex;
       gap: 24px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      padding-bottom: 24px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-      scrollbar-color: var(--red) var(--paper-2);
+      width: max-content;
+      animation: demoAutoScroll 42s linear infinite;
+      padding-block: 16px 28px;
     }
 
-    .demo-scroll-track::-webkit-scrollbar {
-      height: 8px;
+    .demo-scroll-wrapper:hover .demo-scroll-track {
+      animation-play-state: paused;
     }
-    .demo-scroll-track::-webkit-scrollbar-track {
-      background: var(--paper-2);
-      border-radius: 999px;
-    }
-    .demo-scroll-track::-webkit-scrollbar-thumb {
-      background: var(--red);
-      border-radius: 999px;
+
+    @keyframes demoAutoScroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .demo-store-card {
-      flex: 0 0 clamp(300px, 32vw, 380px);
-      scroll-snap-align: start;
+      flex: 0 0 clamp(300px, 30vw, 360px);
       background: var(--paper-2);
       border: 1px solid rgba(217, 119, 6, 0.2);
       border-radius: 20px;
@@ -1138,6 +1138,20 @@
   </footer>
 
   <script src="js/main.js?v=15" defer></script>
+  <script>
+    // Clone demo store cards to guarantee seamless infinite autoscroll
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.querySelector('.demo-scroll-track');
+      if (track) {
+        const originalCards = Array.from(track.children);
+        originalCards.forEach(card => {
+          const clone = card.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          track.appendChild(clone);
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
