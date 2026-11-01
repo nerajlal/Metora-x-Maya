@@ -186,14 +186,16 @@ em { font-style: italic; font-weight: 560; font-synthesis: none; color: var(--re
   color: var(--ink);
 }
 .logo-icon {
-  width: 28px;
-  height: 28px;
+  width: auto;
+  height: clamp(22px, 2vw, 28px);
+  max-width: 44px;
   flex: none;
   display: block;
+  object-fit: contain;
 }
 .footer__logo .logo-icon {
-  width: 34px;
-  height: 34px;
+  height: clamp(28px, 2.8vw, 36px);
+  max-width: 56px;
 }
 .logo-mark {
   background: linear-gradient(135deg, var(--ink) 0%, var(--coconut) 100%);
